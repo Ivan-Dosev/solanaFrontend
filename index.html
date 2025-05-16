@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapSolPay - Coming Soon to Solana Mainnet</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Twitter widgets.js for the follow button -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="brand">
+            <h1 class="brand-name">snapSolPay</h1>
+            <p class="brand-slogan">Split Bills, Pay Later</p>
+        </div>
+        
+        <h2 class="countdown-title">Launch Countdown</h2>
+        <h3 class="countdown-subtitle">Coming Soon to Solana Mainnet</h3>
+        
+        <!-- Added launch date display -->
+        <div class="launch-date">
+            <span>Official Launch: </span>
+            <span class="date-highlight">July 1, 2024</span>
+        </div>
+        
+        <div class="countdown">
+            <div class="time-block">
+                <span id="days">00</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="time-block">
+                <span id="hours">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="time-block">
+                <span id="minutes">00</span>
+                <span class="label">Minutes</span>
+            </div>
+            <div class="time-block">
+                <span id="seconds">00</span>
+                <span class="label">Seconds</span>
+            </div>
+        </div>
+        
+        <!-- Twitter Follow Button -->
+        <div class="social-links">
+            <a href="https://twitter.com/ssolpay?ref_src=twsrc%5Etfw" class="twitter-follow-button" 
+               data-size="large" data-show-count="false">Follow @ssolpay</a>
+            <p class="follow-text">Follow us on Twitter for updates</p>
+        </div>
+    </div>
+
+    <script>
+        // Set the launch date - July 1st of the current year
+        const currentYear = new Date().getFullYear();
+        const launchDate = new Date(`July 1, ${currentYear} 00:00:00`);
+        
+        // If the date has already passed this year, set it for next year
+        if (new Date() > launchDate) {
+            launchDate.setFullYear(currentYear + 1);
+        }
+        
+        // Update the displayed year in the launch date text
+        document.querySelector('.date-highlight').textContent = `July 1, ${launchDate.getFullYear()}`;
+
+        // Update the countdown every second
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            // Calculate days, hours, minutes, seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Display the result
+            document.getElementById("days").textContent = days.toString().padStart(2, '0');
+            document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+            
+            // If the countdown is over
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.querySelector(".countdown").innerHTML = "<h2>SnapSolPay is now live on Solana Mainnet!</h2>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html> 
